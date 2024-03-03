@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
 }
 
 android {
@@ -9,14 +10,32 @@ android {
 
     defaultConfig {
         applicationId = "com.example.solutionx"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions += "logging"
+    productFlavors { // Braces are still used for the productFlavors block
+        create("logCat") { // Use the create method instead of directly specifying flavor names
+            dimension = "logging" // Use '=' instead of ':'
+            // Customize as needed for logCat flavor
+        }
+        create("logWriter") {
+            dimension = "logging"
+            // Customize as needed for logWriter flavor
+        }
+        create("production") {
+            dimension = "logging"
+            // Customize as needed for production flavor
+        }
+    }
 
+    buildFeatures{
+        buildConfig =true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
