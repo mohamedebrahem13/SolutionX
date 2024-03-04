@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">SolutionX</string>
-    <string name="SolutionPlus">SolutionPlus</string>
-
+    <string name="SolutionPlus" translatable="true">SolutionPlus</string>
 </resources>

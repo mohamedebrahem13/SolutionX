@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 
 }
 
@@ -16,7 +17,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildFeatures {
+            dataBinding = true // Enable Data Binding
+        }
     }
+
     flavorDimensions += "logging"
     productFlavors { // Braces are still used for the productFlavors block
         create("logCat") { // Use the create method instead of directly specifying flavor names
@@ -33,9 +38,11 @@ android {
         }
     }
 
+
     buildFeatures{
         buildConfig =true
     }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -49,13 +56,14 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
-dependencies {
 
+dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

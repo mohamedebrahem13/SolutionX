@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import com.example.solutionx.BuildConfig
 import com.example.solutionx.R
+import com.example.solutionx.databinding.ActivityMainBinding
 import com.example.solutionx.utils.CustomLogger
 import com.example.solutionx.utils.LogLevel
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private val writeExternalStorageLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
@@ -30,12 +34,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
           when(BuildConfig.FLAVOR){
            "logWriter" ->  checkWriteExternalStoragePermission()
               "logCat" ->   CustomLogger.log(LogLevel.DEBUG, "logcat debug")
                else -> Unit
           }
+        val deviceLanguage = Locale.getDefault().language
+        val fontResourceId = if (deviceLanguage == "en") {
+            R.font.galano_bold
+        } else {
+            R.font.tajawal_bold
+        }
+        binding.textView.typeface = resources.getFont(fontResourceId)
 
 
 
